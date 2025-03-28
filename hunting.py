@@ -1,13 +1,21 @@
 import os
 import subprocess
 import shutil
-
 # Definisikan tools dan repository instalasinya sesuai dengan GitHub ProjectDiscovery
 TOOLS = {
     "subfinder": "github.com/projectdiscovery/subfinder/v2/cmd/subfinder",
     "httpx": "github.com/projectdiscovery/httpx/cmd/httpx",
     "nuclei": "github.com/projectdiscovery/nuclei/v2/cmd/nuclei"
 }
+
+    # Folder output
+OUTPUT_FOLDER_SUBDO = "subdomain"
+OUTPUT_FOLDER_ACTIVE = "active"
+OUTPUT_FOLDER_NUCLEI = "nuclei"
+os.makedirs(OUTPUT_FOLDER_SUBDO, exist_ok=True)
+os.makedirs(OUTPUT_FOLDER_ACTIVE, exist_ok=True)
+os.makedirs(OUTPUT_FOLDER_NUCLEI, exist_ok=True)
+
 
 def check_and_install_tools():
     for tool, repo in TOOLS.items():
@@ -36,21 +44,20 @@ def show_banner():
     os.system("clear" if os.name == "posix" else "cls")
     print("\n🔥 Welcome to Hunting Tool 🔥\n")
     print("""
- /$$   /$$                       /$$     /$$                             /$$                         /$$
-| $$  | $$                      | $$    |__/                            | $$                        | $$
-| $$  | $$ /$$   /$$ /$$$$$$$  /$$$$$$   /$$ /$$$$$$$   /$$$$$$        /$$$$$$    /$$$$$$   /$$$$$$ | $$
-| $$$$$$$$| $$  | $$| $$__  $$|_  $$_/  | $$| $$__  $$ /$$__  $$      |_  $$_/   /$$__  $$ /$$__  $$| $$
-| $$__  $$| $$  | $$| $$  \ $$  | $$    | $$| $$  \ $$| $$  \ $$        | $$    | $$  \ $$| $$  \ $$| $$
-| $$  | $$| $$  | $$| $$  | $$  | $$ /$$| $$| $$  | $$| $$  | $$        | $$ /$$| $$  | $$| $$  | $$| $$
-| $$  | $$|  $$$$$$/| $$  | $$  |  $$$$/| $$| $$  | $$|  $$$$$$$        |  $$$$/|  $$$$$$/|  $$$$$$/| $$
-|__/  |__/ \______/ |__/  |__/   \___/  |__/|__/  |__/ \____  $$         \___/   \______/  \______/ |__/
-                                                       /$$  \ $$                                        
-                                                      |  $$$$$$/                                        
-                                                       \______/                                         
-    """)
+
+    __  __            __  _                
+   / / / /_  ______  / /_(_)___  ____ _    
+  / /_/ / / / / __ \/ __/ / __ \/ __ `/    
+ / __  / /_/ / / / / /_/ / / / / /_/ /     
+/_/ /_/\__,_/_/ /_/\__/_/_/ /_/\__, /      
+                              /____/       
+v0.3.1
+                phims.tech
+                novgrey.web.id
+  """)
     print("📌 By PHIMS")
-    print("🔗 GitHub: https://github.com/username")
-    print("📷 Instagram: https://instagram.com/username\n")
+    print("🔗 GitHub: https://github.com/phims403")
+    print("📷 Instagram: https://instagram.com/aier_phims\n")
 
 def main():
     check_and_install_tools()
@@ -62,9 +69,13 @@ def main():
         print("[❌] Target tidak boleh kosong!")
         return
 
-    subdomain_file = f"{target}.txt"
-    active_file = f"active_{target}.txt"
-    nuclei_output = f"nuc_active_{target}.txt"
+    subdomain_file = os.path.join(OUTPUT_FOLDER_SUBDO, f"{target}.txt")
+    active_file = os.path.join(OUTPUT_FOLDER_ACTIVE, f"active_{target}.txt")
+    nuclei_output = os.path.join(OUTPUT_FOLDER_NUCLEI, f"nuc_active_{target}.txt")
+
+
+
+
 
     print("[🔍] Mencari subdomain...")
     subprocess.run(f"subfinder -d {target} -o {subdomain_file}", shell=True)
@@ -80,3 +91,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+                  
