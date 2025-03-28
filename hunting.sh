@@ -54,21 +54,20 @@ update_tools() {
 banner() {
     clear
     echo -e "${GREEN}
- /$$   /$$                       /$$     /$$                             /$$                         /$$
-| $$  | $$                      | $$    |__/                            | $$                        | $$
-| $$  | $$ /$$   /$$ /$$$$$$$  /$$$$$$   /$$ /$$$$$$$   /$$$$$$        /$$$$$$    /$$$$$$   /$$$$$$ | $$
-| $$$$$$$$| $$  | $$| $$__  $$|_  $$_/  | $$| $$__  $$ /$$__  $$      |_  $$_/   /$$__  $$ /$$__  $$| $$
-| $$__  $$| $$  | $$| $$  \ $$  | $$    | $$| $$  \ $$| $$  \ $$        | $$    | $$  \ $$| $$  \ $$| $$
-| $$  | $$| $$  | $$| $$  | $$  | $$ /$$| $$| $$  | $$| $$  | $$        | $$ /$$| $$  | $$| $$  | $$| $$
-| $$  | $$|  $$$$$$/| $$  | $$  |  $$$$/| $$| $$  | $$|  $$$$$$$        |  $$$$/|  $$$$$$/|  $$$$$$/| $$
-|__/  |__/ \______/ |__/  |__/   \___/  |__/|__/  |__/ \____  $$         \___/   \______/  \______/ |__/
-                                                       /$$  \ $$                                        
-                                                      |  $$$$$$/                                        
-                                                       \______/                                         
+ 
+    __  __            __  _                
+   / / / /_  ______  / /_(_)___  ____ _    
+  / /_/ / / / / __ \/ __/ / __ \/ __ `/    
+ / __  / /_/ / / / / /_/ / / / / /_/ /     
+/_/ /_/\__,_/_/ /_/\__/_/_/ /_/\__, /      
+                              /____/       
+v0.3.1
+                phims.tech
+                novgrey.web.id
     ${RESET}"
     echo -e "${YELLOW}📌 By PHIMS${RESET}"
-    echo -e "${YELLOW}🔗 GitHub: https://github.com/username${RESET}"
-    echo -e "${YELLOW}📷 Instagram: https://instagram.com/username\n${RESET}"
+    echo -e "${YELLOW}🔗 GitHub: https://github.com/phims403${RESET}"
+    echo -e "${YELLOW}📷 Instagram: https://instagram.com/aier_phims\n${RESET}"
 }
 
 # Fungsi utama
@@ -91,7 +90,7 @@ main() {
     subfinder -d "$target" -o "$subdomain_file"
 
     echo -e "${YELLOW}[🌐] Mengecek subdomain yang aktif...${RESET}"
-    httpx -l "$subdomain_file" -o "$active_file"
+    ./httpx -l "$subdomain_file" -o "$active_file"
 
     echo -e "${YELLOW}[🚀] Menjalankan Nuclei scan...${RESET}"
     nuclei -l "$active_file" -severity low,medium,high,critical -o "$nuclei_output"
